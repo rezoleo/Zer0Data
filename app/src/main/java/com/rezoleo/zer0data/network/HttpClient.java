@@ -1,8 +1,7 @@
 package com.rezoleo.zer0data.network;
 
 import com.rezoleo.zer0data.object.Card;
-import com.rezoleo.zer0data.object.Login;
-import com.rezoleo.zer0data.object.Person;
+import com.rezoleo.zer0data.object.LoginInformation;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -17,7 +16,7 @@ import fr.applicationcore.object.APIException;
  * Created by Thomas on 8/01/16.
  */
 public class HttpClient extends fr.applicationcore.network.ApplicationClient {
-    public Login signIn(String login, String password) throws APIException {
+    public LoginInformation signIn(String login, String password) throws APIException {
         if (login == null || "".equals(login)) {
             return null;
         }
@@ -28,7 +27,7 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
         return accessLoginAuxi(HttpMethod.POST, httpAddress, urlParameters);
     }
 
-    public Login signOut() throws APIException {
+    public LoginInformation signOut() throws APIException {
         String httpAddress = URL + "/api/login/";
 
         return accessLoginAuxi(HttpMethod.DELETE, httpAddress, null);
@@ -71,9 +70,9 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
         }
     }
 
-    protected Login accessLoginAuxi(HttpMethod method, String httpAddress, List<NameValuePair> urlParameters) throws APIException {
+    protected LoginInformation accessLoginAuxi(HttpMethod method, String httpAddress, List<NameValuePair> urlParameters) throws APIException {
         try{
-            Login login = (Login) this.requestOne(method, Login.class, httpAddress, urlParameters, null);
+            LoginInformation login = (LoginInformation) this.requestOne(method, LoginInformation.class, httpAddress, urlParameters, null);
             if(login==null || login.isEmpty()){
                 throw new APIException();
             }
