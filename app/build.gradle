@@ -25,4 +25,6 @@ dependencies {
     compile files('libs/applicationcore-1.0.0.jar')
     compile files('libs/core-1.0.0.jar')
     compile files('libs/service_people-1.0.0.jar')
+    compile files('libs/webservicecore-1.0.0.jar')
+    compile files('libs/service_contributor-1.0.0.jar')
 }
