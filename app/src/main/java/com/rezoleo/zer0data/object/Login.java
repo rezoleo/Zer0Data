@@ -12,6 +12,6 @@ public class Login extends fr.applicationcore.object.APIObject {
 
     @Override
     public boolean isEmpty() {
-        return login != null;
+        return login == null;
     }
 }

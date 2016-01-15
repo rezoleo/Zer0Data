@@ -8,6 +8,6 @@ public class Person extends fr.service_people.object.Person {
 
     @Override
     public boolean isEmpty() {
-        return registered;
+        return !registered;
     }
 }

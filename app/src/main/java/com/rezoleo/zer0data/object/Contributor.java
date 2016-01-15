@@ -8,6 +8,6 @@ public class Contributor extends fr.service_contributor.object.Contributor {
 
     @Override
     public boolean isEmpty() {
-        return registered;
+        return !registered;
     }
 }

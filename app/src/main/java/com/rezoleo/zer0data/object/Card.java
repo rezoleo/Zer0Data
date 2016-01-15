@@ -11,6 +11,6 @@ public class Card extends fr.applicationcore.object.APIObject {
 
     @Override
     public boolean isEmpty() {
-        return registered;
+        return !registered;
     }
 }
