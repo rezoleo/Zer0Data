@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile files('libs/applicationcore-1.0.0.jar')
     compile files('libs/core-1.0.0.jar')
+    compile files('libs/service_people-1.0.0.jar')
 }
