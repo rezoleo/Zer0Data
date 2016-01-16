@@ -56,7 +56,7 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
             return null;
         }
 
-        String http_adress=URL+"/api/people/login/"+login;
+        String http_adress=URL+"/api/people/"+login;
 
         return this.accessPersonAuxi(HttpMethod.GET, http_adress, null);
     }
