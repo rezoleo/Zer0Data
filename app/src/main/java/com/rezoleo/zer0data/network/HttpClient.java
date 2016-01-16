@@ -1,5 +1,6 @@
 package com.rezoleo.zer0data.network;
 
+import com.rezoleo.zer0data.common.Common;
 import com.rezoleo.zer0data.object.Card;
 import com.rezoleo.zer0data.object.LoginInformation;
 
@@ -16,6 +17,12 @@ import fr.applicationcore.object.APIException;
  * Created by Thomas on 8/01/16.
  */
 public class HttpClient extends fr.applicationcore.network.ApplicationClient {
+    public HttpClient() {
+        super();
+        setURL(Common.URL);
+        setUserAgent("Android");
+    }
+
     public LoginInformation signIn(String login, String password) throws APIException {
         if (login == null || "".equals(login)) {
             return null;

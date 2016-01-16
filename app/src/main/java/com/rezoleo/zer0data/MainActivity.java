@@ -6,10 +6,12 @@ import android.content.IntentFilter;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.nfc.tech.MifareClassic;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.rezoleo.zer0data.network.AsyncHttpClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
             TextView tv = (TextView) findViewById(R.id.text);
             tv.setText(tagUid);
+            
+            new AsyncHttpClient().execute("login", "user", "Password1");
         }
     }
 
