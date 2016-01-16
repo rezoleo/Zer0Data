@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             TextView tv = (TextView) findViewById(R.id.text);
             tv.setText(tagUid);
 
-            new AsyncLoginClient().execute("user", "Password1");
+            new AsyncLoginClient(this).execute("user", "Password1");
         }
     }
 
