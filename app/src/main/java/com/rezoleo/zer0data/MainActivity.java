@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.rezoleo.zer0data.network.AsyncHttpClient;
+import com.rezoleo.zer0data.network.AsyncLoginClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
             TextView tv = (TextView) findViewById(R.id.text);
             tv.setText(tagUid);
-            
-            new AsyncHttpClient().execute("login", "user", "Password1");
+
+            new AsyncLoginClient().execute("user", "Password1");
         }
     }
 
