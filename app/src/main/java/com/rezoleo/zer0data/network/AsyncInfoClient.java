@@ -15,8 +15,8 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
     private HttpClient httpClient = new HttpClient();
     private Context context;
 
-    private AllInformation allInformation;
-    private APIException apiException;
+    private AllInformation allInformation = new AllInformation();
+    private APIException apiException = null;
 
     public AsyncInfoClient(Context context) {
         this.context = context;
@@ -44,7 +44,7 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
             default:
                 break;
         }
-        return null;
+        return allInformation;
     }
 
     @Override
