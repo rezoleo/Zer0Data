@@ -3,6 +3,7 @@ package com.rezoleo.zer0data.network;
 import com.rezoleo.zer0data.common.Common;
 import com.rezoleo.zer0data.object.Card;
 import com.rezoleo.zer0data.object.LoginInformation;
+import com.rezoleo.zer0data.object.Person;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -50,7 +51,17 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
         return this.accessCardAuxi(HttpMethod.GET, httpAddress, null);
     }
 
-    /*protected Person accessPersonAuxi(HttpMethod method, String httpAddress, List<NameValuePair> urlParameters) throws APIException {
+    public Person getOnePersonByLogin(String login) throws APIException{
+        if(login==null || login.equals("")){
+            return null;
+        }
+
+        String http_adress=URL+"/api/people/login/"+login;
+
+        return this.accessPersonAuxi(HttpMethod.GET, http_adress, null);
+    }
+
+    protected Person accessPersonAuxi(HttpMethod method, String httpAddress, List<NameValuePair> urlParameters) throws APIException {
         try{
             Person Person = (Person) this.requestOne(method, Person.class, httpAddress, urlParameters, null);
             if(Person==null || Person.get_id()==null){
@@ -61,7 +72,7 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
         catch (APIException e){
             throw e;
         }
-    }*/
+    }
 
     /* Auxiliary functions */
     protected Card accessCardAuxi(HttpMethod method, String httpAddress, List<NameValuePair> urlParameters) throws APIException {
