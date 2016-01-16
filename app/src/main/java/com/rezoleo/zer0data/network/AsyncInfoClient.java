@@ -33,7 +33,7 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
         switch (mode) {
             case "login":
                 try {
-                    allInformation.setPerson(httpClient.getOnePersonByLogin(attribute));
+                    getAllInformation(attribute);
                 } catch (APIException e) {
                     e.printStackTrace();
                     apiException = e;
@@ -41,7 +41,8 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
                 break;
             case "card":
                 try {
-                    allInformation.setCard(httpClient.getOneCardByCode(attribute));
+                    getCard(attribute);
+                    getAllInformation(allInformation.getCard().getOwner());
                 } catch (APIException e) {
                     e.printStackTrace();
                     apiException = e;
@@ -58,17 +59,37 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
         if (apiException != null) {
             UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
         } else if (allInformation.getCard() == null || allInformation.getCard().isEmpty()) {
-            UI.openPopUp(context, "Erreur", "Une erreur est survenue");
+            UI.openPopUp(context, "Erreur", "Une erreur est survenue (Card)");
         } else {
             System.out.println(allInformation.getCard());
         }
         if (apiException != null) {
             UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
         } else if (allInformation.getPerson() == null || allInformation.getPerson().isEmpty()) {
-            UI.openPopUp(context, "Erreur", "Une erreur est survenue");
+            UI.openPopUp(context, "Erreur", "Une erreur est survenue (Person)");
         } else {
             System.out.println(allInformation.getPerson().getFirstname());
         }
+        if (apiException != null) {
+            UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
+        } else if (allInformation.getContributor() == null || allInformation.getContributor().isEmpty()) {
+            UI.openPopUp(context, "Erreur", "Une erreur est survenue (Contributor)");
+        } else {
+            System.out.println(allInformation.getContributor().getLogin());
+        }
         super.onPostExecute(allInformation);
+    }
+
+    private void getAllInformation(String login) throws APIException {
+        allInformation.setPerson(httpClient.getOnePersonByLogin(login));
+        try {
+            allInformation.setContributor(httpClient.getOneContributorByLogin(login));
+        } catch (APIException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getCard(String code) throws APIException {
+        allInformation.setCard(httpClient.getOneCardByCode(code));
     }
 }
