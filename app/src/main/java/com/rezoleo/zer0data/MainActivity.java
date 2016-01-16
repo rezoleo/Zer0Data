@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.rezoleo.zer0data.network.AsyncInfoClient;
 import com.rezoleo.zer0data.network.AsyncLoginClient;
 
 public class MainActivity extends AppCompatActivity {
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
             tv.setText(tagUid);
 
             new AsyncLoginClient(this).execute("user", "Password1");
+            new AsyncInfoClient(this).execute("card", tagUid);
         }
     }
 
