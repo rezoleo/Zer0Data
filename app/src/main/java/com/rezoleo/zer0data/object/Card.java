@@ -9,6 +9,18 @@ public class Card extends fr.applicationcore.object.APIObject {
     protected String owner;
     protected String status;
 
+    public String getCode() {
+        return code;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
     @Override
     public boolean isEmpty() {
         return !registered;
