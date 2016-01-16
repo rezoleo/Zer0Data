@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
             new AsyncLoginClient(this).execute("user", "Password1");
             new AsyncInfoClient(this).execute("card", tagUid);
+            new AsyncInfoClient(this).execute("login", "user");
         }
     }
 

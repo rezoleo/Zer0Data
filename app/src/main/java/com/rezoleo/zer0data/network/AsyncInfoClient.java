@@ -32,6 +32,12 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
 
         switch (mode) {
             case "login":
+                try {
+                    allInformation.setPerson(httpClient.getOnePersonByLogin(attribute));
+                } catch (APIException e) {
+                    e.printStackTrace();
+                    apiException = e;
+                }
                 break;
             case "card":
                 try {
@@ -55,6 +61,13 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
             UI.openPopUp(context, "Erreur", "Une erreur est survenue");
         } else {
             System.out.println(allInformation.getCard());
+        }
+        if (apiException != null) {
+            UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
+        } else if (allInformation.getPerson() == null || allInformation.getPerson().isEmpty()) {
+            UI.openPopUp(context, "Erreur", "Une erreur est survenue");
+        } else {
+            System.out.println(allInformation.getPerson().getFirstname());
         }
         super.onPostExecute(allInformation);
     }
