@@ -45,7 +45,7 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
             return null;
         }
 
-        String httpAddress=URL+"/api/card/code/"+code;
+        String httpAddress=URL+"/api/card/"+code;
 
         return this.accessCardAuxi(HttpMethod.GET, httpAddress, null);
     }
