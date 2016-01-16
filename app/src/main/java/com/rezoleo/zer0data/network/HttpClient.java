@@ -2,6 +2,7 @@ package com.rezoleo.zer0data.network;
 
 import com.rezoleo.zer0data.common.Common;
 import com.rezoleo.zer0data.object.Card;
+import com.rezoleo.zer0data.object.Contributor;
 import com.rezoleo.zer0data.object.LoginInformation;
 import com.rezoleo.zer0data.object.Person;
 
@@ -61,17 +62,14 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
         return this.accessPersonAuxi(HttpMethod.GET, http_adress, null);
     }
 
-    protected Person accessPersonAuxi(HttpMethod method, String httpAddress, List<NameValuePair> urlParameters) throws APIException {
-        try{
-            Person Person = (Person) this.requestOne(method, Person.class, httpAddress, urlParameters, null);
-            if(Person==null || Person.get_id()==null){
-                throw new APIException();
-            }
-            return Person;
+    public Contributor getOneContributorByLogin(String login) throws APIException {
+        if (login == null || "".equals(login)) {
+            return null;
         }
-        catch (APIException e){
-            throw e;
-        }
+
+        String http_address = URL + "/api/contributor/" + login;
+
+        return this.accessContributorAuxi(HttpMethod.GET, http_address, null);
     }
 
     /* Auxiliary functions */
@@ -88,6 +86,19 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
         }
     }
 
+    protected Person accessPersonAuxi(HttpMethod method, String httpAddress, List<NameValuePair> urlParameters) throws APIException {
+        try{
+            Person Person = (Person) this.requestOne(method, Person.class, httpAddress, urlParameters, null);
+            if(Person==null || Person.get_id()==null){
+                throw new APIException();
+            }
+            return Person;
+        }
+        catch (APIException e){
+            throw e;
+        }
+    }
+
     protected LoginInformation accessLoginAuxi(HttpMethod method, String httpAddress, List<NameValuePair> urlParameters) throws APIException {
         try{
             LoginInformation login = (LoginInformation) this.requestOne(method, LoginInformation.class, httpAddress, urlParameters, null);
@@ -97,6 +108,18 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
             return login;
         }
         catch (APIException e){
+            throw e;
+        }
+    }
+
+    protected Contributor accessContributorAuxi(HttpMethod method, String httpAddress, List<NameValuePair> urlParameters) throws APIException {
+        try {
+            Contributor contributor = (Contributor) this.requestOne(method, Contributor.class, httpAddress, urlParameters, null);
+            if (contributor == null || contributor.isEmpty()) {
+                throw new APIException();
+            }
+            return contributor;
+        } catch (APIException e) {
             throw e;
         }
     }
