@@ -9,9 +9,55 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.rezoleo.zer0data.MainActivity">
 
-    <TextView
-        android:id="@+id/text"
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/login"
+        android:layout_marginTop="31dp"
+        android:text="@string/login"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/password"
+        android:text="@string/password"
+        android:layout_below="@+id/login"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logs_remember"
+        android:checked="false"
+        android:text="@string/remember_id"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/connect"
+        android:id="@+id/member_connection"
+        android:layout_below="@+id/logs_remember"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/cant_connect"
+        android:id="@+id/cant_connect"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/member_connection"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:autoLink="web"/>
 </RelativeLayout>
