@@ -1,11 +1,13 @@
 package com.rezoleo.zer0data;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.rezoleo.zer0data.network.AsyncLoginClient;
+import com.rezoleo.zer0data.object.LoginInformation;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,5 +35,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         new AsyncLoginClient(this).execute(login, password);
+    }
+
+    public void goToInformationActivity(LoginInformation loginInformation) {
+        Intent intent = new Intent(this, InformationActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("loginInformation", loginInformation);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
     }
 }

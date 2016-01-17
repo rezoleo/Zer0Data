@@ -3,6 +3,7 @@ package com.rezoleo.zer0data.network;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.rezoleo.zer0data.MainActivity;
 import com.rezoleo.zer0data.object.LoginInformation;
 import com.rezoleo.zer0data.toolbox.UI;
 
@@ -13,13 +14,13 @@ import fr.applicationcore.object.APIException;
  */
 public class AsyncLoginClient extends AsyncTask<String, Void, LoginInformation> {
     private HttpClient httpClient = new HttpClient();
-    private Context context;
+    private MainActivity context;
 
     private APIException apiException = null;
     private LoginInformation loginInformation = null;
 
     public AsyncLoginClient(Context context) {
-        this.context = context;
+        this.context = (MainActivity) context;
     }
 
     @Override
@@ -45,6 +46,7 @@ public class AsyncLoginClient extends AsyncTask<String, Void, LoginInformation> 
             UI.openPopUp(context, "Erreur", "Une erreur est survenue");
         } else {
             System.out.println(loginInformation.getLogin());
+            context.goToInformationActivity(loginInformation);
         }
         super.onPostExecute(loginInformation);
     }
