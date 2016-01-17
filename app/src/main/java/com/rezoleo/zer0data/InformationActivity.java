@@ -13,11 +13,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.rezoleo.zer0data.common.Common;
 import com.rezoleo.zer0data.network.AsyncInfoClient;
 import com.rezoleo.zer0data.object.AllInformation;
 import com.rezoleo.zer0data.object.LoginInformation;
 import com.rezoleo.zer0data.object.Person;
 import com.rezoleo.zer0data.toolbox.Utils;
+import com.squareup.picasso.Picasso;
 
 public class InformationActivity extends AppCompatActivity {
 
@@ -67,11 +69,22 @@ public class InformationActivity extends AppCompatActivity {
         setText(R.id.last_name, person.getLastname());
         setText(R.id.gender, "M".equals(person.getSex()) ? getString(R.string.man) : getString(R.string.woman));
         setText(R.id.age, person.getMajor() ? getString(R.string.full_age) : getString(R.string.under_age));
+        setPhoto(Common.URL + "/api/picture/" + person.getLogin());
     }
 
     private void setText(int id, String string) {
         TextView tv = (TextView) findViewById(id);
         tv.setText(string);
+    }
+
+    private void setPhoto(String url) {
+        ImageView iv = (ImageView) findViewById(R.id.photo);
+        Picasso.with(this)
+                .load(url)
+                .fit()
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .into(iv);
     }
     private void prepareNfc() {
         mAdapter = NfcAdapter.getDefaultAdapter(this);
