@@ -3,6 +3,7 @@ package com.rezoleo.zer0data.network;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.rezoleo.zer0data.InformationActivity;
 import com.rezoleo.zer0data.object.AllInformation;
 import com.rezoleo.zer0data.toolbox.UI;
 
@@ -13,13 +14,13 @@ import fr.applicationcore.object.APIException;
  */
 public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
     private HttpClient httpClient = new HttpClient();
-    private Context context;
+    private InformationActivity context;
 
     private AllInformation allInformation = new AllInformation();
     private APIException apiException = null;
 
     public AsyncInfoClient(Context context) {
-        this.context = context;
+        this.context = (InformationActivity) context;
     }
 
     @Override
@@ -58,24 +59,10 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
     protected void onPostExecute(AllInformation allInformation) {
         if (apiException != null) {
             UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
-        } else if (allInformation.getCard() == null || allInformation.getCard().isEmpty()) {
-            UI.openPopUp(context, "Erreur", "Une erreur est survenue (Card)");
-        } else {
-            System.out.println(allInformation.getCard());
-        }
-        if (apiException != null) {
-            UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
-        } else if (allInformation.getPerson() == null || allInformation.getPerson().isEmpty()) {
-            UI.openPopUp(context, "Erreur", "Une erreur est survenue (Person)");
-        } else {
-            System.out.println(allInformation.getPerson().getFirstname());
-        }
-        if (apiException != null) {
-            UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
-        } else if (allInformation.getContributor() == null || allInformation.getContributor().isEmpty()) {
+        } else if (allInformation == null) {
             UI.openPopUp(context, "Erreur", "Une erreur est survenue (Contributor)");
         } else {
-            System.out.println(allInformation.getContributor().getLogin());
+            context.updateAllInformation(allInformation);
         }
         super.onPostExecute(allInformation);
     }

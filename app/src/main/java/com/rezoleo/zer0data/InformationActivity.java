@@ -12,14 +12,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.rezoleo.zer0data.network.AsyncInfoClient;
+import com.rezoleo.zer0data.object.AllInformation;
+import com.rezoleo.zer0data.object.LoginInformation;
 import com.rezoleo.zer0data.toolbox.Utils;
 
 public class InformationActivity extends AppCompatActivity {
 
-    NfcAdapter mAdapter;
-    PendingIntent mPendingIntent;
-    IntentFilter[] mFilters;
-    String[][] mTechLists;
+    private NfcAdapter mAdapter;
+    private PendingIntent mPendingIntent;
+    private IntentFilter[] mFilters;
+    private String[][] mTechLists;
+
+    private AllInformation allInformation;
 
 
     @Override
@@ -39,7 +44,6 @@ public class InformationActivity extends AppCompatActivity {
 
         // 2) Check if it was triggered by a tag discovered interruption.
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-
             //  3) Get an instance of the TAG from the NfcAdapter
             Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
@@ -48,10 +52,24 @@ public class InformationActivity extends AppCompatActivity {
 
             TextView tv = (TextView) findViewById(R.id.card_recognized);
             tv.setText(tagUid);
+        } else {
+            Bundle b = intent.getExtras();
+            LoginInformation loginInformation = b.getParcelable("loginInformation");
+            new AsyncInfoClient(this).execute("login", loginInformation.getLogin());
         }
     }
 
 
+    public void updateAllInformation(AllInformation allInformation) {
+        this.allInformation = allInformation;
+        setText(R.id.first_name, allInformation.getPerson().getFirstname());
+        setText(R.id.last_name, allInformation.getPerson().getLastname());
+    }
+
+    private void setText(int id, String string) {
+        TextView tv = (TextView) findViewById(id);
+        tv.setText(string);
+    }
     private void prepareNfc() {
         mAdapter = NfcAdapter.getDefaultAdapter(this);
 
