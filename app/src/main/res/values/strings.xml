@@ -15,4 +15,5 @@
     <string name="gender">Sexe :</string>
     <string name="age">Âge :</string>
     <string name="no_information_on_owner">Aucune information sur le propriétaire</string>
+    <string name="photo">Photo</string>
 </resources>
