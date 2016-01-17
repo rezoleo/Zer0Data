@@ -24,30 +24,9 @@ public class InformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
-
-//        hideView(findViewById(R.id.card_recognized));
-
-        mAdapter = NfcAdapter.getDefaultAdapter(this);
-
-        mPendingIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-
-        IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
-
-        try {
-            ndef.addDataType("*/*");
-        } catch (IntentFilter.MalformedMimeTypeException e) {
-            throw new RuntimeException("fail", e);
-        }
-        mFilters = new IntentFilter[] {
-                ndef,
-        };
-
-        // Setup a tech list for all NfcF tags
-        mTechLists = new String[][] { new String[] { MifareClassic.class.getName() } };
+        prepareNfc();
 
         Intent intent = getIntent();
-
         resolveIntent(intent);
     }
 
@@ -84,6 +63,27 @@ public class InformationActivity extends AppCompatActivity {
             out += hex[i];
         }
         return out;
+    }
+
+    private void prepareNfc() {
+        mAdapter = NfcAdapter.getDefaultAdapter(this);
+
+        mPendingIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+
+        IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
+
+        try {
+            ndef.addDataType("*/*");
+        } catch (IntentFilter.MalformedMimeTypeException e) {
+            throw new RuntimeException("fail", e);
+        }
+        mFilters = new IntentFilter[] {
+                ndef,
+        };
+
+        // Setup a tech list for all NfcF tags
+        mTechLists = new String[][] { new String[] { MifareClassic.class.getName() } };
     }
 
     @Override
