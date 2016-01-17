@@ -37,8 +37,7 @@
 
             <!-- END OF NFC INTENTS -->
         </activity>
-        <activity android:name=".InformationsActivity" />
-        <activity android:name=".TestActivity"></activity>
+        <activity android:name=".InformationActivity" />
     </application>
 
 </manifest>
