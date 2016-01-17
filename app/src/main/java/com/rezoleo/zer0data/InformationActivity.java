@@ -10,11 +10,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rezoleo.zer0data.network.AsyncInfoClient;
 import com.rezoleo.zer0data.object.AllInformation;
 import com.rezoleo.zer0data.object.LoginInformation;
+import com.rezoleo.zer0data.object.Person;
 import com.rezoleo.zer0data.toolbox.Utils;
 
 public class InformationActivity extends AppCompatActivity {
@@ -49,9 +51,6 @@ public class InformationActivity extends AppCompatActivity {
 
             String tagUid = Utils.ByteArrayToHexString(tagFromIntent.getId());
             Log.i("NFC", tagUid);
-
-            TextView tv = (TextView) findViewById(R.id.card_recognized);
-            tv.setText(tagUid);
         } else {
             Bundle b = intent.getExtras();
             LoginInformation loginInformation = b.getParcelable("loginInformation");
@@ -62,8 +61,12 @@ public class InformationActivity extends AppCompatActivity {
 
     public void updateAllInformation(AllInformation allInformation) {
         this.allInformation = allInformation;
-        setText(R.id.first_name, allInformation.getPerson().getFirstname());
-        setText(R.id.last_name, allInformation.getPerson().getLastname());
+        Person person = allInformation.getPerson();
+        setText(R.id.owner, person.getLogin());
+        setText(R.id.first_name, person.getFirstname());
+        setText(R.id.last_name, person.getLastname());
+        setText(R.id.gender, "M".equals(person.getSex()) ? getString(R.string.man) : getString(R.string.woman));
+        setText(R.id.age, person.getMajor() ? getString(R.string.full_age) : getString(R.string.under_age));
     }
 
     private void setText(int id, String string) {

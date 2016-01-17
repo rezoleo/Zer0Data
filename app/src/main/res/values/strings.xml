@@ -16,4 +16,8 @@
     <string name="age">Âge : </string>
     <string name="no_information_on_owner">Aucune information sur le propriétaire</string>
     <string name="photo">Photo</string>
+    <string name="man">Homme</string>
+    <string name="woman">Femme</string>
+    <string name="full_age">Majeur</string>
+    <string name="under_age">Mineur</string>
 </resources>
