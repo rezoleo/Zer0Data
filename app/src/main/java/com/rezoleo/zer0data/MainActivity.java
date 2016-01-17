@@ -106,4 +106,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         mAdapter.disableForegroundDispatch(this);
     }
+
+
 }
