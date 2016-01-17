@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.rezoleo.zer0data.toolbox.Utils;
+
 public class InformationActivity extends AppCompatActivity {
 
     NfcAdapter mAdapter;
@@ -41,7 +43,7 @@ public class InformationActivity extends AppCompatActivity {
             //  3) Get an instance of the TAG from the NfcAdapter
             Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
-            String tagUid = ByteArrayToHexString(tagFromIntent.getId());
+            String tagUid = Utils.ByteArrayToHexString(tagFromIntent.getId());
             Log.i("NFC", tagUid);
 
             TextView tv = (TextView) findViewById(R.id.card_recognized);
@@ -49,21 +51,6 @@ public class InformationActivity extends AppCompatActivity {
         }
     }
 
-
-    // Converting byte[] to hex string:
-    private String ByteArrayToHexString(byte[] inArray) {
-        int i, j, in;
-        String[] hex = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
-        String out = "";
-        for (j = 0; j < inArray.length; ++j) {
-            in = (int) inArray[j] & 0xff;
-            i = (in >> 4) & 0x0f;
-            out += hex[i];
-            i = in & 0x0f;
-            out += hex[i];
-        }
-        return out;
-    }
 
     private void prepareNfc() {
         mAdapter = NfcAdapter.getDefaultAdapter(this);
