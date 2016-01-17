@@ -13,19 +13,20 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@android:color/darker_gray"
-        android:id="@+id/line1_owner" />
+        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="6dp" >
+        android:layout_margin="6dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
             android:text="@string/owner" />
 
         <TextView
@@ -39,19 +40,19 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginTop="6dp"
-        android:id="@+id/line2_owner" />
+        android:background="@android:color/darker_gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" >
+        android:layout_margin="6dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
             android:text="@string/first_name" />
 
         <TextView
@@ -63,12 +64,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" >
+        android:layout_margin="6dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
             android:text="@string/last_name" />
 
         <TextView
@@ -80,12 +83,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" >
+        android:layout_margin="6dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
             android:text="@string/gender" />
 
         <TextView
@@ -97,12 +102,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" >
+        android:layout_margin="6dp" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
+            android:paddingEnd="5dp"
+            android:paddingRight="5dp"
             android:text="@string/age" />
 
         <TextView
@@ -114,9 +121,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginTop="20dp"
-        android:id="@+id/line3_owner" />
+        android:background="@android:color/darker_gray" />
 
     <ImageView
         android:id="@+id/photo"
