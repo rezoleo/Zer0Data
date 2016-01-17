@@ -3,7 +3,10 @@
     package="com.rezoleo.zer0data">
 
     <uses-permission android:name="android.permission.NFC" />
-    <uses-feature android:name="android.hardware.nfc" android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -21,17 +24,20 @@
             <!-- These intents handle the NFC interaction -->
 
             <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
             </intent-filter>
-            <meta-data android:name="android.nfc.action.TECH_DISCOVERED"
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/filter_nfc" />
 
             <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
             </intent-filter>
 
             <!-- END OF NFC INTENTS -->
         </activity>
+        <activity android:name=".InformationActivity" />
     </application>
 
 </manifest>
