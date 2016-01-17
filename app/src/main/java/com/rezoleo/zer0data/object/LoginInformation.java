@@ -34,7 +34,7 @@ public class LoginInformation extends fr.applicationcore.object.APIObject implem
     public LoginInformation(Parcel pc) {
         login = pc.readString();
         gate = pc.readString();
-        pc.readStringList(roles);
+        roles = pc.createStringArrayList();
     }
 
     public String getLogin() {
