@@ -1,3 +1,18 @@
 <resources>
+    <!-- Main Activity -->
     <string name="app_name">Zer0Data</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="remember_id">Se souvenir des mes identifiants</string>
+    <string name="connect">Se connecter</string>
+    <string name="cant_connect">Je ne parviens pas à me connecter&#8230;</string>
+
+    <!-- Informations Activity -->
+    <string name="card_recognized">Carte reconnue !</string>
+    <string name="owner">Propriétaire :</string>
+    <string name="last_name">Nom :</string>
+    <string name="first_name">Prénom :</string>
+    <string name="gender">Sexe :</string>
+    <string name="age">Âge :</string>
+    <string name="no_information_on_owner">Aucune information sur le propriétaire</string>
 </resources>
