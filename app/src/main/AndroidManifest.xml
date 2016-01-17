@@ -20,9 +20,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
+        <activity android:name=".InformationActivity">
             <!-- These intents handle the NFC interaction -->
-
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
             </intent-filter>
@@ -34,10 +35,8 @@
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
             </intent-filter>
-
             <!-- END OF NFC INTENTS -->
         </activity>
-        <activity android:name=".InformationActivity" />
     </application>
 
 </manifest>
