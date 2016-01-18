@@ -87,9 +87,11 @@ public class InformationActivity extends AppCompatActivity {
         Picasso.with(this)
                 .load(url)
                 .fit()
+                .centerInside()
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
                 .into(iv);
+        Picasso.with(this).invalidate(url);
     }
     private void prepareNfc() {
         mAdapter = NfcAdapter.getDefaultAdapter(this);
