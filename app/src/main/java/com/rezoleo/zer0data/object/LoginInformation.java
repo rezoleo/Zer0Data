@@ -12,6 +12,7 @@ public class LoginInformation extends fr.applicationcore.object.APIObject implem
     protected String login;
     protected String gate;
     protected List<String> roles;
+    protected String sessionId;
 
 
     /**
@@ -35,10 +36,15 @@ public class LoginInformation extends fr.applicationcore.object.APIObject implem
         login = pc.readString();
         gate = pc.readString();
         roles = pc.createStringArrayList();
+        sessionId = pc.readString();
     }
 
     public String getLogin() {
         return login;
+    }
+
+    public String getSessionId() {
+        return sessionId;
     }
 
     @Override
@@ -56,5 +62,6 @@ public class LoginInformation extends fr.applicationcore.object.APIObject implem
         dest.writeString(login);
         dest.writeString(gate);
         dest.writeStringList(roles);
+        dest.writeString(sessionId);
     }
 }
