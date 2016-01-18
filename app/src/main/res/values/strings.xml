@@ -13,11 +13,13 @@
     <string name="last_name">Nom : </string>
     <string name="first_name">Prénom : </string>
     <string name="gender">Sexe : </string>
-    <string name="age">Âge : </string>
-    <string name="no_information_on_owner">Aucune information sur le propriétaire</string>
-    <string name="photo">Photo</string>
     <string name="man">Homme</string>
     <string name="woman">Femme</string>
+    <string name="age">Âge : </string>
     <string name="full_age">Majeur</string>
     <string name="under_age">Mineur</string>
+    <string name="email">Email : </string>
+    <string name="phone">Téléphone : </string>
+    <string name="no_information_on_owner">Aucune information sur le propriétaire</string>
+    <string name="photo">Photo</string>
 </resources>
