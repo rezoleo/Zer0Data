@@ -69,6 +69,8 @@ public class InformationActivity extends AppCompatActivity {
         setText(R.id.last_name, person.getLastname());
         setText(R.id.gender, "M".equals(person.getSex()) ? getString(R.string.man) : getString(R.string.woman));
         setText(R.id.age, person.getMajor() ? getString(R.string.full_age) : getString(R.string.under_age));
+        setText(R.id.email, person.getMail());
+        setText(R.id.phone, person.getTel());
         setPhoto(Common.URL + "/api/picture/" + person.getLogin());
     }
 
