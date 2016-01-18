@@ -144,6 +144,6 @@ public class Contributor extends APIObject {
     }
 
     public boolean isEmpty() {
-            return this._id == null;
+            return !registered;
         }
 }

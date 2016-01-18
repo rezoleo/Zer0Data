@@ -64,11 +64,14 @@ public class Person extends APIObject {
     @Expose
     @Since(1.0D)
     protected String updatorService = null;
+    @Expose
+    @Since(1.0D)
+    protected boolean registered;
 
     public Person() {
     }
 
-    public Person(String _id, String login, String lastname, String firstname, String sex, Date birthdate, boolean major, String mail, String tel, String picture, SortedSet<String> tags, String creator, Date created, String creatorService, String updator, Date updated, String updatorService) {
+    public Person(String _id, String login, String lastname, String firstname, String sex, Date birthdate, boolean major, String mail, String tel, String picture, SortedSet<String> tags, String creator, Date created, String creatorService, String updator, Date updated, String updatorService, boolean registered) {
         this._id = _id;
         this.login = login;
         this.lastname = lastname;
@@ -86,6 +89,7 @@ public class Person extends APIObject {
         this.updator = updator;
         this.updated = updated;
         this.updatorService = updatorService;
+        this.registered = registered;
     }
 
     public String get_id() {
@@ -222,6 +226,14 @@ public class Person extends APIObject {
 
     public void setUpdatorService(String updatorService) {
         this.updatorService = updatorService;
+    }
+
+    public boolean isRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(boolean registered) {
+        this.registered = registered;
     }
 
     public int hashCode() {
@@ -392,7 +404,8 @@ public class Person extends APIObject {
         }
     }
 
+    @Override
     public boolean isEmpty() {
-        return this._id == null;
+        return !registered;
     }
 }

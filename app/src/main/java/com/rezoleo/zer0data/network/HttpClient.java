@@ -89,7 +89,7 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
     protected Person accessPersonAuxi(HttpMethod method, String httpAddress, List<NameValuePair> urlParameters) throws APIException {
         try{
             Person Person = (Person) this.requestOne(method, Person.class, httpAddress, urlParameters, null);
-            if(Person==null || Person.get_id()==null){
+            if(Person==null || Person.isEmpty()){
                 throw new APIException();
             }
             return Person;
