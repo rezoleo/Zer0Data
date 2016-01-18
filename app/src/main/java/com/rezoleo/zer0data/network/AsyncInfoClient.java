@@ -8,6 +8,7 @@ import com.rezoleo.zer0data.object.AllInformation;
 import com.rezoleo.zer0data.toolbox.UI;
 
 import fr.applicationcore.object.APIException;
+import fr.applicationcore.object.Message;
 
 /**
  * Created by Thomas on 9/01/16.
@@ -18,6 +19,7 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
 
     private AllInformation allInformation = new AllInformation();
     private APIException apiException = null;
+    private String login = null;
 
     public AsyncInfoClient(Context context) {
         this.context = (InformationActivity) context;
@@ -33,6 +35,7 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
 
         switch (mode) {
             case "login":
+                login = null;
                 try {
                     getAllInformation(attribute);
                 } catch (APIException e) {
@@ -41,9 +44,16 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
                 }
                 break;
             case "card":
+                login = params[2];
                 try {
                     getCard(attribute);
-                    getAllInformation(allInformation.getCard().getOwner());
+                    if (allInformation.getCard().getOwner() != null) {
+                        getAllInformation(allInformation.getCard().getOwner());
+                    } else {
+                        apiException = new APIException();
+                        apiException.setMsg(new Message("", "", "", "La carte est reconnue mais ne vous appartient pas", "", 0));
+                        throw apiException;
+                    }
                 } catch (APIException e) {
                     e.printStackTrace();
                     apiException = e;
@@ -60,8 +70,11 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
         if (apiException != null) {
             UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
         } else if (allInformation == null) {
-            UI.openPopUp(context, "Erreur", "Une erreur est survenue (Contributor)");
+            UI.openPopUp(context, "Erreur", "Une erreur est survenue");
         } else {
+            if (login != null && allInformation.getCard().getOwner().equals(login)){
+                UI.openPopUp(context, "Information", "Votre carte est reconnue");
+            }
             context.updateAllInformation(allInformation);
         }
         super.onPostExecute(allInformation);

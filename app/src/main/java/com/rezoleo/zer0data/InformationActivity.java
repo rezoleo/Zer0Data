@@ -29,6 +29,7 @@ public class InformationActivity extends AppCompatActivity {
     private String[][] mTechLists;
 
     private AllInformation allInformation;
+    private LoginInformation loginInformation;
 
 
     @Override
@@ -38,6 +39,9 @@ public class InformationActivity extends AppCompatActivity {
         prepareNfc();
 
         Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        loginInformation = b.getParcelable("loginInformation");
+
         resolveIntent(intent);
     }
 
@@ -53,9 +57,8 @@ public class InformationActivity extends AppCompatActivity {
 
             String tagUid = Utils.ByteArrayToHexString(tagFromIntent.getId());
             Log.i("NFC", tagUid);
+            new AsyncInfoClient(this).execute("card", tagUid, loginInformation.getLogin());
         } else {
-            Bundle b = intent.getExtras();
-            LoginInformation loginInformation = b.getParcelable("loginInformation");
             new AsyncInfoClient(this).execute("login", loginInformation.getLogin());
         }
     }
