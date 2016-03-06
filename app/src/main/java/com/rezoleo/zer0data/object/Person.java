@@ -12,7 +12,7 @@ import fr.applicationcore.object.APIObject;
 /**
  * Created by Thomas on 8/01/16.
  */
-public class Person extends APIObject {
+public class Person implements APIObject {
     @Expose
     @Since(1.0D)
     protected String _id = null;

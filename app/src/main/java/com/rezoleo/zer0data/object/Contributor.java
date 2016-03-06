@@ -10,7 +10,7 @@ import fr.applicationcore.object.APIObject;
 /**
  * Created by Thomas on 8/01/16.
  */
-public class Contributor extends APIObject {
+public class Contributor implements APIObject {
     protected boolean registered;
     @Expose
     @Since(1.0D)

@@ -8,7 +8,7 @@ import com.rezoleo.zer0data.object.AllInformation;
 import com.rezoleo.zer0data.toolbox.UI;
 
 import fr.applicationcore.object.APIException;
-import fr.applicationcore.object.Message;
+import fr.applicationcore.object.ErrorMessage;
 
 /**
  * Created by Thomas on 9/01/16.
@@ -51,7 +51,7 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
                         getAllInformation(allInformation.getCard().getOwner());
                     } else {
                         apiException = new APIException();
-                        apiException.setMsg(new Message("", "", "", "La carte est reconnue mais ne vous appartient pas", "", 0));
+                        apiException.setMsg(new ErrorMessage("", "", "", "La carte est reconnue mais ne vous appartient pas", "", 0));
                         throw apiException;
                     }
                 } catch (APIException e) {

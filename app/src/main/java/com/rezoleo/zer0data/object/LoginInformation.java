@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Thomas on 8/01/16.
  */
-public class LoginInformation extends fr.applicationcore.object.APIObject implements Parcelable {
+public class LoginInformation implements Parcelable, fr.applicationcore.object.APIObject {
     protected String login;
     protected String gate;
     protected List<String> roles;
