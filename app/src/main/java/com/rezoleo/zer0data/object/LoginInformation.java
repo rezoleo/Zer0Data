@@ -12,7 +12,7 @@ public class LoginInformation implements Parcelable, fr.applicationcore.object.A
     protected String login;
     protected String gate;
     protected List<String> roles;
-    protected String sessionid;
+    protected String sid;
 
 
     /**
@@ -36,15 +36,15 @@ public class LoginInformation implements Parcelable, fr.applicationcore.object.A
         login = pc.readString();
         gate = pc.readString();
         roles = pc.createStringArrayList();
-        sessionid = pc.readString();
+        sid = pc.readString();
     }
 
     public String getLogin() {
         return login;
     }
 
-    public String getSessionid() {
-        return sessionid;
+    public String getSid() {
+        return sid;
     }
 
     @Override
@@ -62,6 +62,6 @@ public class LoginInformation implements Parcelable, fr.applicationcore.object.A
         dest.writeString(login);
         dest.writeString(gate);
         dest.writeStringList(roles);
-        dest.writeString(sessionid);
+        dest.writeString(sid);
     }
 }

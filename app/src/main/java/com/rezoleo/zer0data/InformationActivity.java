@@ -74,7 +74,7 @@ public class InformationActivity extends AppCompatActivity {
         setText(R.id.age, person.getMajor() ? getString(R.string.full_age) : getString(R.string.under_age));
         setText(R.id.email, person.getMail());
         setText(R.id.phone, person.getTel());
-        setPhoto(Common.URL + "/api/picture/" + person.getLogin());
+        setPhoto(Common.URL + "/api/picture/" + person.getLogin() + "?sid=" + loginInformation.getSid());
     }
 
     private void setText(int id, String string) {
