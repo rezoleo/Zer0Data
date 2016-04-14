@@ -6,6 +6,7 @@
     <string name="remember_id">Se souvenir des mes identifiants</string>
     <string name="connect">Se connecter</string>
     <string name="cant_connect">Je ne parviens pas à me connecter&#8230;</string>
+    <string name="unable_to_contact_server">Impossible de se connecter au serveur.</string>
 
     <!-- Informations Activity -->
     <string name="card_recognized">Carte reconnue !</string>

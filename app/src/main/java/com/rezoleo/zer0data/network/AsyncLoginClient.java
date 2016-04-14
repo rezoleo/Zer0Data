@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.rezoleo.zer0data.MainActivity;
+import com.rezoleo.zer0data.R;
 import com.rezoleo.zer0data.object.LoginInformation;
 import com.rezoleo.zer0data.toolbox.UI;
 
@@ -41,7 +42,11 @@ public class AsyncLoginClient extends AsyncTask<String, Void, LoginInformation> 
     @Override
     protected void onPostExecute(LoginInformation loginInformation) {
         if (apiException != null) {
-            UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
+            if (null != apiException.getMsg()) {
+                UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
+            } else {
+                UI.openPopUp(context, "Erreur", context.getResources().getString(R.string.unable_to_contact_server));
+            }
         } else if (loginInformation == null || loginInformation.getLogin() == null) {
             UI.openPopUp(context, "Erreur", "Une erreur est survenue");
         } else {
