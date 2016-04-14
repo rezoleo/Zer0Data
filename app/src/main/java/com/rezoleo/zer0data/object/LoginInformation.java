@@ -8,10 +8,11 @@ import java.util.List;
 /**
  * Created by Thomas on 8/01/16.
  */
-public class LoginInformation extends fr.applicationcore.object.APIObject implements Parcelable {
+public class LoginInformation implements Parcelable, fr.applicationcore.object.APIObject {
     protected String login;
     protected String gate;
     protected List<String> roles;
+    protected String sid;
 
 
     /**
@@ -34,11 +35,16 @@ public class LoginInformation extends fr.applicationcore.object.APIObject implem
     public LoginInformation(Parcel pc) {
         login = pc.readString();
         gate = pc.readString();
-        pc.readStringList(roles);
+        roles = pc.createStringArrayList();
+        sid = pc.readString();
     }
 
     public String getLogin() {
         return login;
+    }
+
+    public String getSid() {
+        return sid;
     }
 
     @Override
@@ -56,5 +62,6 @@ public class LoginInformation extends fr.applicationcore.object.APIObject implem
         dest.writeString(login);
         dest.writeString(gate);
         dest.writeStringList(roles);
+        dest.writeString(sid);
     }
 }
