@@ -58,7 +58,8 @@
         android:id="@+id/member_connection"
         android:layout_below="@+id/logs_remember"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp" />
+        android:layout_marginTop="31dp"
+        android:onClick="connect" />
 
     <TextView
         android:layout_width="wrap_content"

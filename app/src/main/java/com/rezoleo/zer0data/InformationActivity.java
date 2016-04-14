@@ -10,23 +10,90 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.rezoleo.zer0data.common.Common;
+import com.rezoleo.zer0data.network.AsyncInfoClient;
+import com.rezoleo.zer0data.object.AllInformation;
+import com.rezoleo.zer0data.object.LoginInformation;
+import com.rezoleo.zer0data.object.Person;
+import com.rezoleo.zer0data.toolbox.Utils;
+import com.squareup.picasso.Picasso;
 
 public class InformationActivity extends AppCompatActivity {
 
-    NfcAdapter mAdapter;
-    PendingIntent mPendingIntent;
-    IntentFilter[] mFilters;
-    String[][] mTechLists;
+    private NfcAdapter mAdapter;
+    private PendingIntent mPendingIntent;
+    private IntentFilter[] mFilters;
+    private String[][] mTechLists;
+
+    private AllInformation allInformation;
+    private LoginInformation loginInformation;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
+        prepareNfc();
 
-//        hideView(findViewById(R.id.card_recognized));
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        loginInformation = b.getParcelable("loginInformation");
 
+        resolveIntent(intent);
+    }
+
+
+    private void resolveIntent(Intent intent) {
+        // 1) Parse the intent and get the action that triggered this intent
+        String action = intent.getAction();
+
+        // 2) Check if it was triggered by a tag discovered interruption.
+        if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
+            //  3) Get an instance of the TAG from the NfcAdapter
+            Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+
+            String tagUid = Utils.ByteArrayToHexString(tagFromIntent.getId());
+            Log.i("NFC", tagUid);
+            new AsyncInfoClient(this).execute("card", tagUid, loginInformation.getLogin());
+        } else {
+            new AsyncInfoClient(this).execute("login", loginInformation.getLogin());
+        }
+    }
+
+
+    public void updateAllInformation(AllInformation allInformation) {
+        this.allInformation = allInformation;
+        Person person = allInformation.getPerson();
+        setText(R.id.owner, person.getLogin());
+        setText(R.id.first_name, person.getFirstname());
+        setText(R.id.last_name, person.getLastname());
+        setText(R.id.gender, "M".equals(person.getSex()) ? getString(R.string.man) : getString(R.string.woman));
+        setText(R.id.age, person.getMajor() ? getString(R.string.full_age) : getString(R.string.under_age));
+        setText(R.id.email, person.getMail());
+        setText(R.id.phone, person.getTel());
+        setPhoto(Common.URL + "/api/picture/" + person.getLogin() + "?sid=" + loginInformation.getSid());
+    }
+
+    private void setText(int id, String string) {
+        TextView tv = (TextView) findViewById(id);
+        tv.setText(string);
+    }
+
+    private void setPhoto(String url) {
+        ImageView iv = (ImageView) findViewById(R.id.photo);
+        Picasso.with(this)
+                .load(url)
+                .fit()
+                .centerInside()
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .into(iv);
+        Picasso.with(this).invalidate(url);
+    }
+    private void prepareNfc() {
         mAdapter = NfcAdapter.getDefaultAdapter(this);
 
         mPendingIntent = PendingIntent.getActivity(this, 0,
@@ -45,45 +112,6 @@ public class InformationActivity extends AppCompatActivity {
 
         // Setup a tech list for all NfcF tags
         mTechLists = new String[][] { new String[] { MifareClassic.class.getName() } };
-
-        Intent intent = getIntent();
-
-        resolveIntent(intent);
-    }
-
-
-    private void resolveIntent(Intent intent) {
-        // 1) Parse the intent and get the action that triggered this intent
-        String action = intent.getAction();
-
-        // 2) Check if it was triggered by a tag discovered interruption.
-        if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-
-            //  3) Get an instance of the TAG from the NfcAdapter
-            Tag tagFromIntent = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-
-            String tagUid = ByteArrayToHexString(tagFromIntent.getId());
-            Log.i("NFC", tagUid);
-
-            TextView tv = (TextView) findViewById(R.id.card_recognized);
-            tv.setText(tagUid);
-        }
-    }
-
-
-    // Converting byte[] to hex string:
-    private String ByteArrayToHexString(byte[] inArray) {
-        int i, j, in;
-        String[] hex = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"};
-        String out = "";
-        for (j = 0; j < inArray.length; ++j) {
-            in = (int) inArray[j] & 0xff;
-            i = (in >> 4) & 0x0f;
-            out += hex[i];
-            i = in & 0x0f;
-            out += hex[i];
-        }
-        return out;
     }
 
     @Override

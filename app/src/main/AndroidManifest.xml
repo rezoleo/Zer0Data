@@ -24,19 +24,6 @@
         </activity>
 
         <activity android:name=".InformationActivity">
-            <!-- These intents handle the NFC interaction -->
-            <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/filter_nfc" />
-
-            <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
-            </intent-filter>
-            <!-- END OF NFC INTENTS -->
         </activity>
     </application>
 
