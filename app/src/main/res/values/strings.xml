@@ -22,4 +22,10 @@
     <string name="phone">Téléphone : </string>
     <string name="no_information_on_owner">Aucune information sur le propriétaire</string>
     <string name="photo">Photo</string>
+
+    <!-- SharedPreferences Strings -->
+    <string name="pref_remember">com.rezoleo.zerodata.pref_remember</string>
+    <string name="pref_user">com.rezoleo.zerodata.pref_user</string>
+    <string name="pref_password">com.rezoleo.zerodata.pref_password</string>
+
 </resources>
