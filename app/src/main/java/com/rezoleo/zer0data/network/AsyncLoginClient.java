@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.rezoleo.zer0data.MainActivity;
+import com.rezoleo.zer0data.common.Common;
 import com.rezoleo.zer0data.object.LoginInformation;
+import com.rezoleo.zer0data.object.Status;
 import com.rezoleo.zer0data.toolbox.UI;
 
 import fr.applicationcore.object.APIException;
@@ -41,11 +43,13 @@ public class AsyncLoginClient extends AsyncTask<String, Void, LoginInformation> 
     @Override
     protected void onPostExecute(LoginInformation loginInformation) {
         if (apiException != null) {
+            Common.status = com.rezoleo.zer0data.object.Status.disconnected;
             UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
         } else if (loginInformation == null || loginInformation.getLogin() == null) {
+            Common.status = com.rezoleo.zer0data.object.Status.disconnected;
             UI.openPopUp(context, "Erreur", "Une erreur est survenue");
         } else {
-            System.out.println(loginInformation.getLogin());
+            Common.status = com.rezoleo.zer0data.object.Status.connected;
             context.goToInformationActivity(loginInformation);
         }
         super.onPostExecute(loginInformation);
