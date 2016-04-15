@@ -29,16 +29,20 @@ public class MainActivity extends AppCompatActivity {
         tvPassword = (TextView) findViewById(R.id.password);
 
         sharedPref = getPreferences(Context.MODE_PRIVATE);
+        prepareCredentials();
+    }
+
+    private void prepareCredentials() {
         boolean should_remember = sharedPref.getBoolean(getString(R.string.pref_remember), false);
 
         cbShouldRemember.setChecked(should_remember);
 
         if (should_remember) {
             String pref_login = sharedPref.getString(getString(R.string.pref_user), "");
-            String pref_pasword = sharedPref.getString(getString(R.string.pref_password), "");
+            String pref_password = sharedPref.getString(getString(R.string.pref_password), "");
 
             tvLogin.setText(pref_login);
-            tvPassword.setText(pref_pasword);
+            tvPassword.setText(pref_password);
         }
     }
 
