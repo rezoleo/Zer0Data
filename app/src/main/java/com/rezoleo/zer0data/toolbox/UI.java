@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
+import com.rezoleo.zer0data.object.GlobalState;
+import com.rezoleo.zer0data.object.SesssionStatus;
+
 /**
  * Contains all UI related functions<br/><br/>
  *
@@ -15,8 +18,9 @@ public class UI {
      * @param context The Activity where the pop-up should be created
      * @param popUpTitle The title of the pop-up
      * @param popUpMessage The message of the pop-up
+     * @param setDisconnectStatus Should the status change to disconnected
      */
-    public static void openPopUp(Context context, String popUpTitle, String popUpMessage)
+    public static void openPopUp(Context context, String popUpTitle, String popUpMessage, final boolean setDisconnectStatus)
     {
         AlertDialog.Builder builder;
         AlertDialog dialog;
@@ -31,7 +35,9 @@ public class UI {
         // Add the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK button
+                if (setDisconnectStatus) {
+                    GlobalState.checkAndReplace(null, SesssionStatus.disconnected);
+                }
             }
         });
 

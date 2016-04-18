@@ -68,12 +68,12 @@ public class AsyncInfoClient extends AsyncTask<String, Void, AllInformation> {
     @Override
     protected void onPostExecute(AllInformation allInformation) {
         if (apiException != null) {
-            UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
+            UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage(), false);
         } else if (allInformation == null) {
-            UI.openPopUp(context, "Erreur", "Une erreur est survenue");
+            UI.openPopUp(context, "Erreur", "Une erreur est survenue", false);
         } else {
             if (login != null && allInformation.getCard().getOwner().equals(login)){
-                UI.openPopUp(context, "Information", "Votre carte est reconnue");
+                UI.openPopUp(context, "Information", "Votre carte est reconnue", false);
             }
             context.updateAllInformation(allInformation);
         }

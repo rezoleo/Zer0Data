@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 
 import com.rezoleo.zer0data.MainActivity;
 import com.rezoleo.zer0data.R;
+import com.rezoleo.zer0data.object.GlobalState;
 import com.rezoleo.zer0data.object.LoginInformation;
+import com.rezoleo.zer0data.object.SesssionStatus;
 import com.rezoleo.zer0data.toolbox.UI;
 
 import fr.applicationcore.object.APIException;
@@ -43,14 +45,14 @@ public class AsyncLoginClient extends AsyncTask<String, Void, LoginInformation> 
     protected void onPostExecute(LoginInformation loginInformation) {
         if (apiException != null) {
             if (null != apiException.getMsg()) {
-                UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage());
+                UI.openPopUp(context, "Erreur", apiException.getMsg().getMessage(), true);
             } else {
-                UI.openPopUp(context, "Erreur", context.getResources().getString(R.string.unable_to_contact_server));
+                UI.openPopUp(context, "Erreur", context.getResources().getString(R.string.unable_to_contact_server), true);
             }
         } else if (loginInformation == null || loginInformation.getLogin() == null) {
-            UI.openPopUp(context, "Erreur", "Une erreur est survenue");
+            UI.openPopUp(context, "Erreur", "Une erreur est survenue", true);
         } else {
-            System.out.println(loginInformation.getLogin());
+            GlobalState.checkAndReplace(null, SesssionStatus.connected);
             context.goToInformationActivity(loginInformation);
         }
         super.onPostExecute(loginInformation);
