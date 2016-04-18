@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.rezoleo.zer0data.common.Common;
 import com.rezoleo.zer0data.network.AsyncLoginClient;
+import com.rezoleo.zer0data.object.GlobalState;
 import com.rezoleo.zer0data.object.LoginInformation;
-import com.rezoleo.zer0data.object.Status;
+import com.rezoleo.zer0data.object.SesssionStatus;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,10 +21,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void connect(View v) {
-        if (Common.status != Status.disconnected) {
+        if (!GlobalState.checkAndReplace(SesssionStatus.disconnected, SesssionStatus.connecting)) {
             return;
         }
-        Common.status = Status.connecting;
 
         TextView tvLogin = (TextView) findViewById(R.id.login);
         TextView tvPassword = (TextView) findViewById(R.id.password);
@@ -59,6 +58,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        Common.status = Status.disconnected;
+        GlobalState.checkAndReplace(null, SesssionStatus.disconnected);
     }
 }
