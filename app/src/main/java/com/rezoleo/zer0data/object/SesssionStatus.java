@@ -6,5 +6,5 @@ package com.rezoleo.zer0data.object;
 public enum SesssionStatus {
     disconnected,
     connecting,
-    connected;
+    connected,
 }

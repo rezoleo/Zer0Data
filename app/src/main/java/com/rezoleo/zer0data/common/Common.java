@@ -1,7 +1,5 @@
 package com.rezoleo.zer0data.common;
 
-import com.rezoleo.zer0data.object.SesssionStatus;
-
 /**
  * Created by Thomas on 8/01/16.
  */
