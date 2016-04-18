@@ -14,6 +14,7 @@ import java.util.List;
 
 import fr.applicationcore.network.HttpMethod;
 import fr.applicationcore.object.APIException;
+import fr.applicationcore.toolbox.CheckAttributes;
 
 /**
  * Created by Thomas on 8/01/16.
@@ -26,9 +27,9 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
     }
 
     public LoginInformation signIn(String login, String password) throws APIException {
-        if (login == null || "".equals(login)) {
-            return null;
-        }
+        CheckAttributes.isEmptyThrowsError(login);
+        CheckAttributes.checkRegexThrowsError(login);
+
         String httpAddress = URL + "/api/login/" + login;
         List<NameValuePair> urlParameters = new ArrayList<>();
         urlParameters.add(new BasicNameValuePair("password", password));
@@ -43,9 +44,8 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
     }
 
     public Card getOneCardByCode(String code) throws APIException {
-        if(code==null || code.equals("")){
-            return null;
-        }
+        CheckAttributes.isEmptyThrowsError(code);
+        CheckAttributes.checkRegexThrowsError(code);
 
         String httpAddress=URL+"/api/card/"+code;
 
@@ -53,9 +53,8 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
     }
 
     public Person getOnePersonByLogin(String login) throws APIException{
-        if(login==null || login.equals("")){
-            return null;
-        }
+        CheckAttributes.isEmptyThrowsError(login);
+        CheckAttributes.checkRegexThrowsError(login);
 
         String http_adress=URL+"/api/people/"+login;
 
@@ -63,9 +62,8 @@ public class HttpClient extends fr.applicationcore.network.ApplicationClient {
     }
 
     public Contributor getOneContributorByLogin(String login) throws APIException {
-        if (login == null || "".equals(login)) {
-            return null;
-        }
+        CheckAttributes.isEmptyThrowsError(login);
+        CheckAttributes.checkRegexThrowsError(login);
 
         String http_address = URL + "/api/contributor/" + login;
 
